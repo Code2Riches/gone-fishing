@@ -6,19 +6,6 @@ const prompt = require('prompt-sync')({sigint: true});
 // let userNumber = Number(prompt("Enter a number"));
 // console.log(userNumber);
 
-/*
-fish {
-    ...name: string,
-    ...weight: number,
-    ...value: number,
-}
-*/
-
-
-//for our descriptive words
-// const fish = generateRandomFish();
-// pick randomly from fish descriptors/types arrays
-//2 descriptors and 1 fish type (= newFish.name?? or "name"?)
 //2 array of descriptors 
 let desc1 = ['brown', 'cold', 'polluted','tame', 'tiny', 'distinct', 'ugly', 'fat', 'hostile', 'aggressive']; 
 let desc2 = ['lousy', 'mundane', 'warm-blooded', 'coy', 'flaky', 'freshwater', 'succulent', 'primitive', 'savory', 'menacing'];
@@ -26,7 +13,6 @@ let desc2 = ['lousy', 'mundane', 'warm-blooded', 'coy', 'flaky', 'freshwater', '
 let fishType = ['Sword Fish', 'Atlantic Cod', 'Mackerel', 'Trout', 'Atlantic Salmon', 'Tuna', 'Shark', 'Red Mullet', 'Mahi-Mahi', 'Haddock'];
 
 //hourCtr - variable to keep track of time (6 hr limit)
-//loop to simulate the passage of time
 let hourCtr = 1;
 
 //fishKeep.length = totalLength
@@ -41,8 +27,8 @@ let userInput = '';
 let userRelease = '';
 let fishKeep = [];
 
-
-console.log("You've gone fishing! Try to maximize the value of your caught fish. You can fish for six hours (till 12:00pm) and can catch at most 10 lbs of fish.");
+console.log("\n==========================================\n");
+console.log("You've gone fishing! Try to maximize the value of your caught fish. You can fish for six hours and can catch at most 10 lbs of fish.");
 
 console.log("\n==========================================\n");
 
@@ -59,16 +45,12 @@ let randomWeight = () => {
 }
 
 let randomValue = () => {
-    let value = Math.ceil((Math.random() * 1000) / 100)
+    let value = Math.ceil((Math.random() * 1000) / 100);
+    return Number(value);
 }
 
 let createFish = (name, weight, value) => {
 
-    // let newFish = {
-    //     name: name,
-    //     weight: weight,
-    //     value: value,
-    // };
     let newFish = {};
     newFish.name = name;
     newFish.weight = weight;
@@ -78,9 +60,9 @@ let createFish = (name, weight, value) => {
 }
 
 while (hourCtr < 7 && weightCtr < 10) {
-    console.log(`That was attempt #: ${hourCtr}`);
+    console.log(`That was attempt #: ${hourCtr}`); // MOVE TO AFTER 1ST FISHING ATTEMPT
 
-    console.log(`\nIt is ${hourCtr + 5} O'Clock. You have ${fishKeep.length} fish, with a total weight of ${weightCtr} lbs, and worth $${valueCtr}\n`);
+    console.log(`\nIt's ${hourCtr + 5} O'Clock. You have ${fishKeep.length} fish, with a total weight of ${weightCtr} lbs, and worth $${valueCtr}\n`);
 
 
     if (hourCtr > 1) {
@@ -94,11 +76,11 @@ while (hourCtr < 7 && weightCtr < 10) {
         fishKeep.pop();
         console.log("\nWe won't count that Fish!\n")
         } else if (userRelease === "n") {
-        console.log("\nThat's a good One!\n")
+        console.log("\nNow that's a good One!\n")
         }
     }
 
-    console.log("\nFish Again!\n");
+    console.log("\nGo Fishing!\n");
 
     newFish = createFish(randomFish(), randomWeight(), randomValue());
     console.log(newFish);
@@ -106,7 +88,7 @@ while (hourCtr < 7 && weightCtr < 10) {
 
     console.log(`You got a ${newFish.name} that weighs ${newFish.weight} and is worth $${newFish.value}\n`);
 
-    weightCtr += newFishweight;
+    weightCtr += newFish.weight;
     valueCtr += newFish.value;
 
     userInput = prompt("Would you like to [c]atch or [r]elease this one? > ");
